@@ -1,0 +1,23 @@
+form {
+  padding: 12px 20px;
+  .form-group {
+    position: relative;
+    margin: 25px 0px;
+    label {
+      position: absolute;
+      font-size: 0.9rem;
+      top: 5px;
+      left: 5px;
+      color: #999;
+      transition: all 0.2s ease;
+    }
+    .form-control {
+      font-size: 0.9rem;
+      color: #444;
+    }
+    .form-control:not(:placeholder-shown) ~ label,
+    .form-control:focus ~ label {
+      top: -22px;
+    }
+  }
+}

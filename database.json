@@ -1,0 +1,29 @@
+{
+  "students": [
+    {
+      "name": "đặng thanh huyền",
+      "branch": "cntt",
+      "address": "tam nông",
+      "email": "huyenemail",
+      "numberPhone": "3342412412",
+      "select": "K14",
+      "id": 1
+    },
+    {
+      "name": " nguyễn thế an",
+      "branch": "cntt ",
+      "address": "bằng doãn đoan hùng",
+      "email": "nguyenthean12062002@gmail.com",
+      "numberPhone": "09167147137127",
+      "select": "K12",
+      "id": 2
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "userName": "admin",
+      "userPassword": "admin"
+    }
+  ]
+}

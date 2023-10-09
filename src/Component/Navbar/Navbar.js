@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
 function NavBars() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -14,14 +13,11 @@ function NavBars() {
             <Nav.Link href="/">Trang Chủ</Nav.Link>
             <Nav.Link href="/about">Thông Tin</Nav.Link>
             <NavDropdown title="Tài Khoản" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Cài đặt</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                Quyền riêng tư
+              <NavDropdown.Item href="/account/regeister">
+                Đăng Ký
               </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Điều khoản sử dụng
+              <NavDropdown.Item href="/account/login">
+                Đăng Nhập
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

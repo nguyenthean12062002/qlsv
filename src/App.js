@@ -4,8 +4,10 @@ import Container from "react-bootstrap/Container";
 import Header from "./Layout/Header/Header";
 import Home from "./Router/Home/Home";
 import Footer from "./Layout/Footer/Footer";
-import About from "./Router/About/About";
+import ManagerStudents from "./Router/ManagerStudents/ManagerStudents";
+import ManagerTution from "./Router/ManagerTution/ManagerTution";
 import Login from "./Router/Login/Login";
+import Register from "./Router/Resgister/Resgister";
 function App() {
   return (
     <Router>
@@ -14,9 +16,10 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/managerstudents" element={<ManagerStudents />} />
+            <Route path="/managertution" element={<ManagerTution />} />
             <Route path="/account/login" element={<Login />} />
-            <Route path="/account/register" element={<Login />} />
+            <Route path="/account/register" element={<Register />} />
           </Routes>
         </Container>
         {/* <Footer /> */}

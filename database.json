@@ -2,21 +2,48 @@
   "students": [
     {
       "name": "đặng thanh huyền",
-      "branch": "cntt",
+      "codeStudents": 1000413,
+      "branch": " cntt",
       "address": "tam nông",
-      "email": "huyenemail",
-      "numberPhone": "3342412412",
+      "email": "",
+      "numberPhone": "09122140y",
       "select": "K14",
+      "id": 2
+    },
+    {
+      "name": "nguyễn thế an",
+      "codeStudents": 21251246,
+      "branch": "cntt",
+      "address": "bằng doãn đoan hùng phú thọ",
+      "email": "nguyenthean12062002@gmail.com",
+      "numberPhone": "0961563714",
+      "select": "K12",
+      "tution": 6000000,
+      "subTution": 200,
+      "dateTution": "12/8/2023",
       "id": 1
     },
     {
-      "name": " nguyễn thế an",
-      "branch": "cntt ",
-      "address": "bằng doãn đoan hùng",
-      "email": "nguyenthean12062002@gmail.com",
-      "numberPhone": "09167147137127",
-      "select": "K12",
-      "id": 2
+      "name": " thắng",
+      "codeStudents": 999000413,
+      "branch": " cntt",
+      "address": "liên quân",
+      "email": "thanngngu",
+      "numberPhone": "9218476",
+      "select": "",
+      "tution": 7000000,
+      "subTution": 900,
+      "dateTution": "09/02/2021",
+      "id": 4
+    },
+    {
+      "name": " annafa",
+      "branch": " sdfad",
+      "address": "sf",
+      "email": "",
+      "numberPhone": "",
+      "select": "",
+      "id": 5
     }
   ],
   "accounts": [
@@ -24,6 +51,13 @@
       "id": 1,
       "userName": "admin",
       "userPassword": "admin"
+    }
+  ],
+  "checklogin": [
+    {
+      "id": 1,
+      "nameLogin": "admin",
+      "passLogin": "admin"
     }
   ]
 }

@@ -1,56 +1,39 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import ReturnHome from "../../Component/ReturnHome";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { getAccount, putIsCheckLogin } from "../../Services/ServerAccount";
+import { UserContext } from "../../Context/UseContext";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const ApiLogin = "http://localhost:3000/accounts";
+  const navigate = useNavigate();
+  const { login } = useContext(UserContext);
   const [listAccounts, setListAccounts] = useState([]);
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
-  //   const history = useHistory();
-  const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
-    getAccount();
-  }, []);
-  const Logins = () => {
-    return axios.get(ApiLogin);
-  };
-  const getAccount = async () => {
-    let res = await Logins();
-    if (res && res.data) {
-      setListAccounts(res.data);
-    }
-  };
-  const load = () => {
-    const fake = () => {
-      document.addEventListener("keydown", () => {
-        <Link to="/about"></Link>;
-      });
-    };
-    fake();
-  };
-
+    getDataAccount();
+  }, [login]);
+  async function getDataAccount() {
+    const res = await getAccount();
+    setListAccounts(res.data);
+  }
   const handleLogin = (e) => {
     e.preventDefault();
-
+    getDataAccount();
+    const toastID = toast.loading("Đang đăng nhập");
     listAccounts.map((item) => {
-      const toastID = toast.loading("Đang đăng nhập");
-      if (userName == item.userName && userPass == item.userPassword) {
-        setIsLogin(true);
+      if (userName == item.nameLogin && userPass == item.passLogin) {
         setTimeout(() => {
           toast.dismiss(toastID);
           toast.success("Đăng nhập thành công");
-          <ReturnHome show={true}></ReturnHome>;
+          navigate("/");
         }, 2000);
+        login(item.nameLogin);
       } else {
         setTimeout(() => {
           toast.dismiss(toastID);
+          toast.error("Tài khoản hoặc mật khẩu không đúng");
         }, 2000);
-        toast.error("lỗi");
       }
     });
   };
@@ -65,6 +48,7 @@ const Login = () => {
             className="form-control"
             autoComplete="userName"
             placeholder="Tên"
+            autoFocus
             onChange={(e) => {
               setUserName(e.target.value);
             }}
@@ -104,15 +88,12 @@ const Login = () => {
         </button>
         <button type="submit" className="btn btn-primary">
           <Link
-            to="/accout/register"
+            to="/account/register"
             className="text-white text-decoration-none"
           >
             Đăng Ký
           </Link>
         </button>
-        {listAccounts.map((it, index) => {
-          <li key={index}>{it.userName}</li>;
-        })}
       </form>
       <ToastContainer />
     </div>

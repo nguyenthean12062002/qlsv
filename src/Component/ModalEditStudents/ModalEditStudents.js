@@ -1,46 +1,56 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { postStudents } from "../../Services/StudentServices";
 import { ToastContainer, toast } from "react-toastify";
-import "./index.scss";
 import { useState, useEffect } from "react";
-const ModalAddStudents = (props) => {
-  const { show, handleClose, handleUpdateStudents } = props;
+import { editStudents } from "../../Services/StudentServices";
+import { FetchAllStudents } from "../../Services/StudentServices";
+const ModalEditStudents = (props) => {
+  const { show, isEdit, idEdit, handleClose, handleUpdateStudents } = props;
   const [name, setName] = useState(" ");
-  const [codeStudents, setCodeStudents] = useState(" ");
   const [branch, setBranch] = useState(" ");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [numberPhone, setNumberPhone] = useState("");
   const [select, setSelect] = useState("");
-  const handleClickAdd = () => {
-    postData();
-    setName("");
-    setAddress("");
-    setBranch("");
-    setEmail("");
-    setNumberPhone("");
-  };
-  async function postData(
-    data = { name, branch, address, email, numberPhone, select }
-  ) {
-    const response = await postStudents(data);
-    let iMess = toast.loading("Đang thêm");
+  useEffect(() => {
+    fetch(`http://localhost:3000/students/${idEdit}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setName(data.name);
+        setEmail(data.email);
+        setAddress(data.address);
+        setBranch(data.branch);
+        setNumberPhone(data.numberPhone);
+        setSelect(data.select);
+      });
+  }, [isEdit]);
+  async function updataData() {
+    editStudents(idEdit, {
+      name,
+      branch,
+      address,
+      email,
+      numberPhone,
+      select,
+    });
+    let res = await FetchAllStudents();
+    let iM = toast.loading("Đang cập nhật!");
     setTimeout(() => {
-      toast.dismiss(iMess);
-      toast.success("Thêm thành cônng");
+      toast.dismiss(iM);
+      toast.success("Cập nhật thành công");
       handleUpdateStudents();
-    }, 2000);
+    }, 1500);
   }
-  // edit
-
+  const handleClickUpdateEdit = () => {
+    updataData();
+  };
   return (
-    <div className="container" style={{ width: 100 }}>
+    <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Thêm sinh viên</Modal.Title>
+          <Modal.Title>Sửa thông tin sinh viên</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Nhập thông tin cá nhân đầy đủ dưới đây:</Modal.Body>
+        <Modal.Body>Nhập các thông tin cần chỉnh sửa:</Modal.Body>
         <form>
           <div className="form__wrapper form-row">
             <div className="wrapper form-group col-md-6">
@@ -54,18 +64,6 @@ const ModalAddStudents = (props) => {
               />
               <label htmlFor="name">Họ và tên</label>
             </div>
-            <div className="wrapper form-group col-md-6">
-              <input
-                type="text"
-                className="form-control"
-                value={codeStudents}
-                onChange={(e) => {
-                  setCodeStudents(e.target.value);
-                }}
-              />
-              <label htmlFor="name">Mã SV</label>
-            </div>
-
             <div className="wrapper form-group col-md-6">
               <input
                 type="text"
@@ -135,15 +133,14 @@ const ModalAddStudents = (props) => {
           </Button>
           <Button
             variant="primary"
-            onClick={handleClickAdd}
+            onClick={handleClickUpdateEdit}
             onMouseUp={handleClose}
           >
-            Thêm sinh viên
+            Cập nhật thông tin
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
-    </div>
+    </>
   );
 };
-export default ModalAddStudents;
+export default ModalEditStudents;

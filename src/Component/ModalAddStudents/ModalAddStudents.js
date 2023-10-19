@@ -16,13 +16,14 @@ const ModalAddStudents = (props) => {
   const handleClickAdd = () => {
     postData();
     setName("");
+    setCodeStudents("");
     setAddress("");
     setBranch("");
     setEmail("");
     setNumberPhone("");
   };
   async function postData(
-    data = { name, branch, address, email, numberPhone, select }
+    data = { name, codeStudents, branch, address, email, numberPhone, select }
   ) {
     const response = await postStudents(data);
     let iMess = toast.loading("Đang thêm");

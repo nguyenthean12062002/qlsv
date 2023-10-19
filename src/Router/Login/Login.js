@@ -25,7 +25,7 @@ const Login = () => {
       if (userName == item.nameLogin && userPass == item.passLogin) {
         setTimeout(() => {
           toast.dismiss(toastID);
-          toast.success("Đăng nhập thành công");
+          toast.success("Đăng nhập thành cônng");
           navigate("/");
         }, 2000);
         login(item.nameLogin);

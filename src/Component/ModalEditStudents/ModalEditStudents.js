@@ -7,16 +7,18 @@ import { FetchAllStudents } from "../../Services/StudentServices";
 const ModalEditStudents = (props) => {
   const { show, isEdit, idEdit, handleClose, handleUpdateStudents } = props;
   const [name, setName] = useState(" ");
+  const [codeStudents, setCodeStudents] = useState(" ");
   const [branch, setBranch] = useState(" ");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [numberPhone, setNumberPhone] = useState("");
   const [select, setSelect] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:3000/students/${idEdit}`)
+    fetch(`https://4rhqkq-8080.csb.app/students/${idEdit}`)
       .then((res) => res.json())
       .then((data) => {
         setName(data.name);
+        setCodeStudents(data.codeStudents);
         setEmail(data.email);
         setAddress(data.address);
         setBranch(data.branch);
@@ -27,13 +29,13 @@ const ModalEditStudents = (props) => {
   async function updataData() {
     editStudents(idEdit, {
       name,
+      codeStudents,
       branch,
       address,
       email,
       numberPhone,
       select,
     });
-    let res = await FetchAllStudents();
     let iM = toast.loading("Đang cập nhật!");
     setTimeout(() => {
       toast.dismiss(iM);
@@ -63,6 +65,17 @@ const ModalEditStudents = (props) => {
                 }}
               />
               <label htmlFor="name">Họ và tên</label>
+            </div>
+            <div className="wrapper form-group col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                value={codeStudents}
+                onChange={(e) => {
+                  setCodeStudents(e.target.value);
+                }}
+              />
+              <label htmlFor="name">Mã SV</label>
             </div>
             <div className="wrapper form-group col-md-6">
               <input

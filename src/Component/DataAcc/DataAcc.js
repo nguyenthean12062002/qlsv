@@ -115,7 +115,7 @@ const DataAcc = ({ props }) => {
             .filter((item) => {
               return search.toLowerCase() === " "
                 ? item
-                : item.name.toLowerCase().includes(search);
+                : item.name.toLowerCase().includes(search.toLowerCase());
             })
             .map((item, index) => {
               return (

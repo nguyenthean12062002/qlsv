@@ -59,6 +59,17 @@ const ModalAddStudents = (props) => {
                 type="text"
                 className="form-control"
                 value={codeStudents}
+                onKeyPress={(e) => {
+                  const keyCode = e.which || e.keyCode;
+                  const validKeyCodes = [8, 9, 13, 27, 46]; // Các key code cho phép (Backspace, Tab, Enter, Esc, Delete)
+                  if (keyCode < 48 || keyCode > 57) {
+                    // Kiểm tra key code không thuộc khoảng 0-9
+                    if (!validKeyCodes.includes(keyCode)) {
+                      // Kiểm tra key code không thuộc danh sách các key code cho phép
+                      e.preventDefault(); // Ngăn chặn ký tự không hợp lệ được nhập vào
+                    }
+                  }
+                }}
                 onChange={(e) => {
                   setCodeStudents(e.target.value);
                 }}
@@ -106,6 +117,17 @@ const ModalAddStudents = (props) => {
                 type="text"
                 className="form-control"
                 value={numberPhone}
+                onKeyPress={(e) => {
+                  const keyCode = e.which || e.keyCode;
+                  const validKeyCodes = [8, 9, 13, 27, 46]; // Các key code cho phép (Backspace, Tab, Enter, Esc, Delete)
+                  if (keyCode < 48 || keyCode > 57) {
+                    // Kiểm tra key code không thuộc khoảng 0-9
+                    if (!validKeyCodes.includes(keyCode)) {
+                      // Kiểm tra key code không thuộc danh sách các key code cho phép
+                      e.preventDefault(); // Ngăn chặn ký tự không hợp lệ được nhập vào
+                    }
+                  }
+                }}
                 onChange={(e) => {
                   setNumberPhone(e.target.value);
                 }}

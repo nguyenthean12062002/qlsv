@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = "http://localhost:3000/students";
+const API = "https://4rhqkq-8080.csb.app/students";
 // call API
 const FetchAllStudents = () => {
   return axios.get(API);

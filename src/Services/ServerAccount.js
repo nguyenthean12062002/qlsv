@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = "http://localhost:3000/checklogin";
+const API = "https://4rhqkq-8080.csb.app/checklogin";
 const getAccount = () => {
   return axios.get(API);
 };

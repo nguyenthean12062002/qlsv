@@ -9,10 +9,10 @@ const Home = () => {
   return (
     <section className="main">
       <main className="main__wrapper w-100">
-        <Container className="mt-5">
+        <Container className="pt-3">
           <Row className="justify-content-center">
             <Col md={8}>
-              <h1>Web Quản lí Sinh viên</h1>
+              <h1>Quản lí Sinh viên</h1>
               <p>
                 Web Quản lí Sinh viên là một ứng dụng được thiết kế để giúp quản
                 lí thông tin và hoạt động liên quan đến sinh viên trong các

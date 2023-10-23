@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext } from "react";
+import "./index.scss";
 import { toast, ToastContainer } from "react-toastify";
-import Container from "react-bootstrap/Container";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/UseContext";
 import { useNavigate } from "react-router-dom";
+
+import { AiFillCaretDown } from "react-icons/ai";
 function NavBars() {
   const { user, login, logout } = useContext(UserContext);
   const navigate = useNavigate();
@@ -14,7 +16,10 @@ function NavBars() {
       login(localStorage.getItem("name"));
     }
   }, []);
-
+  const handleEventUserName = () => {
+    const classLogout = document.querySelector(".item__logout");
+    classLogout.classList.toggle("active");
+  };
   const handleLogOut = (e) => {
     logout(user.name);
     navigate("/");
@@ -22,51 +27,83 @@ function NavBars() {
     toast.success("Đăng xuất thành công");
   };
   return (
-    <Navbar expand="lg" className="bg-body-tertiary ">
-      <Container>
-        <Navbar.Brand href="/">QLSV</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/">Trang Chủ</Nav.Link>
-            {/* hide managerStudents */}
-            {localStorage.getItem("name") && (
-              <>
-                <Nav.Link href="/managerstudents">Quản lí sinh viên</Nav.Link>
-                <Nav.Link href="/managertution">Quản lí học phí</Nav.Link>
-              </>
-            )}
-            <NavDropdown
-              href="/"
-              className="text-capitalize"
-              title={user.name ? `${user.name}` : "Tài khoản"}
-              id="basic-nav-dropdown"
+    <nav className="nav">
+      <a className="title" to="/">
+        QLSV
+      </a>
+      <ul className="list">
+        <li className="item">
+          <Link className="item__link" to="/">
+            Trang Chủ
+          </Link>
+        </li>
+        {localStorage.getItem("name") && (
+          <>
+            <li className="item">
+              <Link className="item__link" to="/managerstudents">
+                Quản lí sinh viên
+              </Link>
+            </li>
+            <li className="item">
+              <Link className="item__link" to="/managertution">
+                Quản lí học phí
+              </Link>
+            </li>
+            <li className="item">
+              <Link className="item__link" to="/managerlearn">
+                Học tập
+              </Link>
+            </li>
+            <li className="item">
+              <Link className="item__link" to="/managerstudents">
+                Quản lí giảng viên
+              </Link>
+            </li>
+            <li className="item">
+              <Link className="item__link" to="/managerstudents">
+                Các khoa
+              </Link>
+            </li>
+            <li className="item">
+              <Link className="item__link" to="/managerstudents">
+                Phân quyền truy cập
+              </Link>
+            </li>
+          </>
+        )}
+        <span className="g"></span>
+        {user && user.name ? (
+          <>
+            <li className="item">
+              <span onClick={handleEventUserName} className="item__user-name">
+                {user.name}
+                <AiFillCaretDown className="icon" />
+              </span>
+            </li>
+            <Link
+              className="item__link item__logout"
+              to="/"
+              onClick={handleLogOut}
             >
-              {user && user.name ? (
-                <>
-                  <NavDropdown.Item
-                    href="/"
-                    onClick={handleLogOut}
-                    className="w-1"
-                  >
-                    Đăng Xuất
-                  </NavDropdown.Item>
-                </>
-              ) : (
-                <>
-                  <NavDropdown.Item href="/account/register">
-                    Đăng Ký
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/account/login">
-                    Đăng Nhập
-                  </NavDropdown.Item>
-                </>
-              )}
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              Đăng Xuất
+            </Link>
+          </>
+        ) : (
+          <>
+            <li className="item">
+              <Link className="item__link" to="/account/register">
+                Đăng Ký
+              </Link>
+            </li>
+            <li className="item">
+              <Link className="item__link" to="/account/login">
+                Đăng Nhập
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
   );
 }
 

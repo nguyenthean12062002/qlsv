@@ -1,12 +1,11 @@
-import DataAcc from "../../Component/DataAcc/DataAcc";
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { useState, useEffect } from "react";
 import { FetchAllStudents } from "../../Services/StudentServices";
 import { ToastContainer } from "react-toastify";
+import ModalEditStudentsTution from "../../Component/ModalEditStudentTution/ModalEditStudentTution";
 const ManagerTution = () => {
   const [listStudents, setListStudents] = useState([]);
-  const [isShowModalAddStudents, setShowModalAddStudents] = useState(false);
+  const [isShowModalEditStudents, setShowModalEditStudents] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const [idEdit, setIdEdit] = useState(0);
   useEffect(() => {
@@ -21,17 +20,19 @@ const ManagerTution = () => {
   const handlePrintf = () => {
     window.print();
   };
-  const handleShow = () => {
-    setShowModalAddStudents(true);
-  };
-
-  const handleUpdateStudents = () => {
-    getStudent();
-  };
-  const handleEditStudents = (e) => {
+  const handleShow = (e) => {
+    setShowModalEditStudents(true);
     setEdit(true);
     setIdEdit(e.target.dataset.index);
   };
+  const handleUpdateStudents = () => {
+    getStudent();
+  };
+  const handleClose = () => {
+    setShowModalEditStudents(false);
+    setEdit(false);
+  };
+
   return (
     <>
       <h2 className="my-4">Học phí sinh viên</h2>
@@ -46,11 +47,7 @@ const ManagerTution = () => {
             >
               In DS
             </button>
-            <button
-              className="btn btn-success mx-2"
-              onClick={handleShow}
-              size="sm"
-            >
+            <button className="btn btn-success mx-2" size="sm">
               Import Excel
             </button>
             <button className="btn btn-danger" onClick={handleShow} size="sm">
@@ -79,7 +76,12 @@ const ManagerTution = () => {
                   <td className="text-capitalize">{item.name}</td>
                   <td className="text-capitalize">{item.codeStudents}</td>
                   <td className="text-capitalize">{item.branch}</td>
-                  <td className="text-uppercase">{item.tution}</td>
+                  <td className="text-uppercase">
+                    {(item.select === "K11" && "6.000.000") ||
+                      (item.select === "K12" && "8.000.000") ||
+                      (item.select === "K13" && "12.000.000") ||
+                      (item.select === "K14" && "15.000.000")}
+                  </td>
                   <td className="text-capitalize">{item.subTution}</td>
                   <td className="text-lowercase">{item.dateTution}</td>
                   <td className="d-flex align-items-center justify-content-center ">
@@ -97,7 +99,7 @@ const ManagerTution = () => {
                           type="button"
                           className="btn btn-warning"
                           data-index={item.id}
-                          onClick={handleEditStudents}
+                          onClick={handleShow}
                         >
                           Sửa
                         </button>
@@ -116,6 +118,13 @@ const ManagerTution = () => {
         </Table>
         <ToastContainer />
       </div>
+      <ModalEditStudentsTution
+        show={isShowModalEditStudents}
+        isEdit={isEdit}
+        idEdit={idEdit}
+        handleClose={handleClose}
+        handleUpdateStudents={handleUpdateStudents}
+      />
     </>
   );
 };

@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@300;400;500;700&display=swap");
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+input,
+select,
+textarea {
+  background-color: transparent;
+  outline: none;
+}
+button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+}
+body {
+  min-height: 100vh;
+  font-weight: 400;
+  font-size: 62.5%;
+  line-height: 1;
+  font-family: Roboto;
+}
+:root {
+  --backgr-nav: #a9eaf7;
+  --color-white: #fff;
+  --color-black: #111;
+}
+
+.container {
+  width: 1200px;
+}
+.modal-content {
+  width: 1200px !important;
+}
+.modal-dialog {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  font-size: 0.9rem;
+  color: var(--color-white);
+}
+.fake_btn {
+  cursor: pointer;
+}

@@ -1,21 +1,35 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 import { editStudents } from "../../Services/StudentServices";
 const ModalEditStudents = (props) => {
   const { show, isEdit, idEdit, handleClose, handleUpdateStudents } = props;
   const [name, setName] = useState(" ");
   const [codeStudents, setCodeStudents] = useState(" ");
+  const [department, setDepartment] = useState(" ");
+  const [nationality, setNationality] = useState(" ");
+  const [birthDay, setBirthDay] = useState(" ");
+  const [sex, setSex] = useState(" ");
   const [branch, setBranch] = useState(" ");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [numberPhone, setNumberPhone] = useState("");
   const [select, setSelect] = useState("");
+  const [nation, setNation] = useState("");
+  const [graduationPlace, setGraduationPlace] = useState("");
+  const [yearGraduationPlace, setYearGraduationPlace] = useState("");
   useEffect(() => {
     fetch(`https://4rhqkq-8080.csb.app/students/${idEdit}`)
       .then((res) => res.json())
       .then((data) => {
+        setDepartment(data.department);
+        setNationality(data.nationality);
+        setBirthDay(data.birthDay);
+        setSex(data.sex);
+        setNation(data.nation);
+        setGraduationPlace(data.graduationPlace);
+        setYearGraduationPlace(data.yearGraduationPlace);
         setName(data.name);
         setCodeStudents(data.codeStudents);
         setEmail(data.email);
@@ -29,11 +43,18 @@ const ModalEditStudents = (props) => {
     editStudents(idEdit, {
       name,
       codeStudents,
+      sex,
+      department,
+      birthDay,
       branch,
       address,
       email,
       numberPhone,
       select,
+      nationality,
+      yearGraduationPlace,
+      graduationPlace,
+      nation,
     });
     let iM = toast.loading("Đang cập nhật!");
     setTimeout(() => {
@@ -46,26 +67,169 @@ const ModalEditStudents = (props) => {
     updataData();
   };
   return (
-    <>
-      <Modal show={show} onHide={handleClose}>
+    <div className="container" style={{ width: 100 }}>
+      <Modal show={show} fullscreen={true} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Sửa thông tin sinh viên</Modal.Title>
+          <Modal.Title>Thêm sinh viên</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Nhập các thông tin cần chỉnh sửa:</Modal.Body>
         <form>
           <div className="form__wrapper form-row">
-            <div className="wrapper form-group col-md-6">
-              <input
-                type="text"
-                className="form-control"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <label htmlFor="name">Họ và tên</label>
+            {/* 1 */}
+            <div className="form__wrapper row">
+              <div className="wrapper form-group col-sm-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <label htmlFor="name">Họ và tên</label>
+              </div>
+              <div className="wrapper form-group col-sm-3">
+                <input
+                  type="date"
+                  className="form-control"
+                  value={birthDay}
+                  onChange={(e) => {
+                    setBirthDay(e.target.value);
+                  }}
+                />
+                <label htmlFor="name">Ngày sinh</label>
+              </div>
+              <div className="wrapper form-group col-sm-3">
+                <select
+                  className="form-control"
+                  value={sex}
+                  onChange={(e) => {
+                    setSex(e.target.value);
+                  }}
+                >
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                  <option value="Khác">Khác</option>
+                </select>
+                <label>Giới tính</label>
+              </div>
+              <div className="wrapper form-group col-sm-2">
+                <select
+                  className="form-control"
+                  value={nationality}
+                  onChange={(e) => {
+                    setNationality(e.target.value);
+                  }}
+                >
+                  <option value="Việt Nam">Việt Nam</option>
+                  <option value="Khác">Khác</option>
+                </select>
+                <label>Quốc tịch</label>
+              </div>
             </div>
-            <div className="wrapper form-group col-md-6">
+            {/* 2 */}
+            <div className="form__wrapper row">
+              <div className="wrapper form-group col-md-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={address}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                />
+                <label htmlFor="inputAddress">Nơi cư trú:</label>
+              </div>
+              <div className="wrapper form-group col-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={nation}
+                  onChange={(e) => {
+                    setNation(e.target.value);
+                  }}
+                />
+                <label htmlFor="inputAddress">Dân tộc:</label>
+              </div>
+            </div>
+            {/* 3 */}
+            <div className="form__wrapper row">
+              <div className="wrapper form-group col-sm-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={yearGraduationPlace}
+                  onChange={(e) => {
+                    setYearGraduationPlace(e.target.value);
+                  }}
+                />
+                <label htmlFor="name">Năm tốt nghiệp:</label>
+              </div>
+              <div className="wrapper form-group col-md-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={graduationPlace}
+                  onChange={(e) => {
+                    setGraduationPlace(e.target.value);
+                  }}
+                />
+                <label htmlFor="name">Nơi tốt nghiệp(tên trường):</label>
+              </div>
+            </div>
+            {/* 4 */}
+            <div className="form__wrapper row">
+              <div className="wrapper form-group col-sm-1">
+                <select
+                  className="form-control"
+                  value={select}
+                  onChange={(e) => {
+                    setSelect(e.target.value);
+                  }}
+                >
+                  <option value="K11">K11</option>
+                  <option value="K12">K12</option>
+                  <option value="K13">K13</option>
+                  <option value="K14">K14</option>
+                </select>
+                <label htmlFor="inputState">Khóa:</label>
+              </div>
+              <div className="wrapper form-group col-sm-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={department}
+                  onChange={(e) => {
+                    setDepartment(e.target.value);
+                  }}
+                />
+                <label htmlFor="name">Khoa:</label>
+              </div>
+              <div className="wrapper form-group col-sm-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={branch}
+                  onChange={(e) => {
+                    setBranch(e.target.value);
+                  }}
+                />
+                <label htmlFor="category">Chuyên ngành:</label>
+              </div>
+            </div>
+            {/* 5 */}
+            <div className="form__wrapper row">
+              <div className="wrapper form-group col-sm-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={codeStudents}
+                  onChange={(e) => {
+                    setCodeStudents(e.target.value);
+                  }}
+                />
+                <label htmlFor="name">Mã SV</label>
+              </div>
+              {/* <div className="wrapper form-group col-sm-3">
               <input
                 type="text"
                 className="form-control"
@@ -75,67 +239,43 @@ const ModalEditStudents = (props) => {
                 }}
               />
               <label htmlFor="name">Mã SV</label>
+            </div> */}
             </div>
-            <div className="wrapper form-group col-md-6">
-              <input
-                type="text"
-                className="form-control"
-                value={branch}
-                onChange={(e) => {
-                  setBranch(e.target.value);
-                }}
-              />
-              <label htmlFor="category">Ngành</label>
-            </div>
-          </div>
-          <div className="wrapper form-group">
-            <input
-              type="text"
-              className="form-control"
-              value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-              }}
-            />
-            <label htmlFor="inputAddress">Địa chỉ</label>
-          </div>
-          <div className="form__wrapper form-row">
-            <div className="wrapper form-group col-md-6">
-              <input
-                type="email"
-                className="form-control"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <label htmlFor="inputEmail">Email</label>
-            </div>
-            <div className="wrapper form-group col-md-6">
-              <input
-                type="text"
-                className="form-control"
-                value={numberPhone}
-                onChange={(e) => {
-                  setNumberPhone(e.target.value);
-                }}
-              />
-              <label htmlFor="inputNumber">SDT</label>
-            </div>
-            <div className="form-group col-md-4">
-              <h6 htmlFor="inputState">Khóa</h6>
-              <select
-                className="form-control"
-                value={select}
-                onChange={(e) => {
-                  setSelect(e.target.value);
-                }}
-              >
-                <option value="K11">K11</option>
-                <option value="K12">K12</option>
-                <option value="K13">K13</option>
-                <option value="K14">K14</option>
-              </select>
+            {/* 6 */}
+            <div className="form__wrapper row">
+              <div className="wrapper form-group col-sm-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                <label htmlFor="inputEmail">Email:</label>
+              </div>
+              <div className="wrapper form-group col-sm-3">
+                <input
+                  type="tel"
+                  className="form-control"
+                  value={numberPhone}
+                  onKeyPress={(e) => {
+                    const keyCode = e.which || e.keyCode;
+                    const validKeyCodes = [8, 9, 13, 27, 46]; // Các key code cho phép (Backspace, Tab, Enter, Esc, Delete)
+                    if (keyCode < 48 || keyCode > 57) {
+                      // Kiểm tra key code không thuộc khoảng 0-9
+                      if (!validKeyCodes.includes(keyCode)) {
+                        // Kiểm tra key code không thuộc danh sách các key code cho phép
+                        e.preventDefault(); // Ngăn chặn ký tự không hợp lệ được nhập vào
+                      }
+                    }
+                  }}
+                  onChange={(e) => {
+                    setNumberPhone(e.target.value);
+                  }}
+                />
+                <label htmlFor="inputNumber">Số điện thoại:</label>
+              </div>
             </div>
           </div>
         </form>
@@ -148,11 +288,12 @@ const ModalEditStudents = (props) => {
             onClick={handleClickUpdateEdit}
             onMouseUp={handleClose}
           >
-            Cập nhật thông tin
+            Thêm sinh viên
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+      <ToastContainer />
+    </div>
   );
 };
 export default ModalEditStudents;

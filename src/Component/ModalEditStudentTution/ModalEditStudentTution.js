@@ -44,7 +44,7 @@ const ModalEditStudentsTution = (props) => {
   };
   return (
     <div className="container" style={{ width: 100 }}>
-      <Modal show={show} fullscreen={true} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} fullscreen={true}>
         <Modal.Header closeButton>
           <Modal.Title>Sửa học phí sinh viên</Modal.Title>
         </Modal.Header>

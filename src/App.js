@@ -2,13 +2,13 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Header from "./Layout/Header/Header";
-import Home from "./Router/Home/Home";
+import Home from "./Pages/Home/Home";
 import Footer from "./Layout/Footer/Footer";
-import ManagerStudents from "./Router/ManagerStudents/ManagerStudents";
-import ManagerTution from "./Router/ManagerTution/ManagerTution";
-import ManagerLearn from "./Router/ManagerLearn/ManagerLearn";
-import Login from "./Router/Login/Login";
-import Register from "./Router/Resgister/Resgister";
+import ManagerStudents from "./Pages/ManagerStudents/ManagerStudents";
+import ManagerTution from "./Pages/ManagerTution/ManagerTution";
+import ManagerLearn from "./Pages/ManagerLearn/ManagerLearn";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Resgister/Resgister";
 function App() {
   return (
     <Router>

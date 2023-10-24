@@ -26,20 +26,30 @@ function NavBars() {
     e.preventDefault();
     toast.success("Đăng xuất thành công");
   };
+  const loadActive = () => {
+    const listItems = document.querySelectorAll(".item");
+    listItems.forEach((listItem) => {
+      listItem.addEventListener("click", () => {
+        listItems.forEach((item) => item.classList.remove("active"));
+        listItem.classList.add("active");
+      });
+    });
+  };
+  loadActive();
   return (
     <nav className="nav">
       <a className="title" to="/">
         QLSV
       </a>
       <ul className="list">
-        <li className="item">
+        <li className="item active">
           <Link className="item__link" to="/">
             Trang Chủ
           </Link>
         </li>
         {localStorage.getItem("name") && (
           <>
-            <li className="item">
+            <li className="item ">
               <Link className="item__link" to="/managerstudents">
                 Quản lí sinh viên
               </Link>
@@ -54,7 +64,7 @@ function NavBars() {
                 Học tập
               </Link>
             </li>
-            <li className="item">
+            <li className="item ">
               <Link className="item__link" to="/managerstudents">
                 Quản lí giảng viên
               </Link>

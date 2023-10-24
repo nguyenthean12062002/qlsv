@@ -27,6 +27,7 @@
       display: flex;
       align-items: center;
       position: relative;
+      transition: all 0.3s linear;
       &:hover {
         background-color: #10caf0;
       }
@@ -89,4 +90,7 @@
       background-color: rgb(167, 167, 168);
     }
   }
+}
+.item.active {
+  background-color: #10caf0;
 }

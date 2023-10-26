@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <div className="d-flex align-items-center justify-content-center ">
-      <form className="w-25 mt-5 bg-light py-5 px-5 ">
+      <form className="w-50 mt-5 bg-light py-5 px-5 ">
         <div className="form-group ">
           <input
             value={userName}
@@ -79,14 +79,10 @@ const Login = () => {
             Nhớ mật khẩu
           </label>
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary me-3"
-          onClick={handleLogin}
-        >
+        <button type="submit" className="btn btn-primary" onClick={handleLogin}>
           Đăng nhập
         </button>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn__register btn-info">
           <Link
             to="/account/register"
             className="text-white text-decoration-none"

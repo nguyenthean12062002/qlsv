@@ -10,8 +10,7 @@ import ModalAddStudents from "../../Component/ModalAddStudents/ModalAddStudents.
 import ModalEditStudents from "../../Component/ModalEditStudents/ModalEditStudents";
 import ModalReviewStudents from "../../Component/ModalReviewStdudents/ModalReviewStudents";
 
-import { AiOutlineEye } from "react-icons/ai";
-const ManagerStudents = ({ props }) => {
+const ManagerStudents = () => {
   const [listStudents, setListStudents] = useState([]);
   const [isShowModalAddStudents, setShowModalAddStudents] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -64,15 +63,19 @@ const ManagerStudents = ({ props }) => {
     setEdit(true);
     setIdEdit(e.target.dataset.index);
   };
+  //search
 
   const handleChangeSearch = (e) => {
     const value = e.target.value;
     setSearch(value);
   };
+
+  // review students
   const handleReviewStudents = (e) => {
     setIsReview(true);
     setIdReview(e.target.dataset.index);
   };
+
   return (
     <div className="w-100">
       <div className="w-100 h-10 d-flex my-3 justify-content-between">
@@ -92,13 +95,12 @@ const ManagerStudents = ({ props }) => {
       </div>
       <>
         {/* search students */}
-        <form className="w-25  py-1 px-1  ">
+        <form className="w-25 py-1 px-1">
           <div className="form-group ">
             <input
               value={search}
               type="text"
               className="form-control"
-              autoComplete="search"
               placeholder="Tìm kiếm sinh viên"
               onChange={handleChangeSearch}
             />
@@ -119,9 +121,9 @@ const ManagerStudents = ({ props }) => {
         <tbody>
           {listStudents
             .filter((item) => {
-              return search.toLowerCase() === " "
+              return search.toLowerCase() === ""
                 ? item
-                : item.name.toLowerCase().includes(search.toLowerCase());
+                : item.name.toLowerCase().includes(search);
             })
             .map((item, index) => {
               return (

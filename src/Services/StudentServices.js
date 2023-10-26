@@ -18,4 +18,3 @@ const editStudents = (index, data) => {
 };
 
 export { FetchAllStudents, postStudents, deleteStudents, editStudents };
-// return axios.put(`${API}/${index}`, data);

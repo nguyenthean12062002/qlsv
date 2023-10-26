@@ -1,31 +1,6 @@
-import { useState, useEffect, useContext } from "react";
 import "./index.scss";
-import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../Context/UseContext";
-import { useNavigate } from "react-router-dom";
-
-import { AiFillCaretDown } from "react-icons/ai";
 function NavBars() {
-  const { user, login, logout } = useContext(UserContext);
-  const navigate = useNavigate();
-  // get data from local storage then check is Name Login
-
-  useEffect(() => {
-    if (localStorage.getItem("name")) {
-      login(localStorage.getItem("name"));
-    }
-  }, []);
-  const handleEventUserName = () => {
-    const classLogout = document.querySelector(".item__logout");
-    classLogout.classList.toggle("active");
-  };
-  const handleLogOut = (e) => {
-    logout(user.name);
-    navigate("/");
-    e.preventDefault();
-    toast.success("Đăng xuất thành công");
-  };
   const loadActive = () => {
     const listItems = document.querySelectorAll(".item");
     listItems.forEach((listItem) => {
@@ -37,10 +12,13 @@ function NavBars() {
   };
   loadActive();
   return (
-    <nav className="nav">
+    <nav className="nav d-flex flex-column">
       <a className="title" to="/">
-        QLSV
+        Quản lý sinh viên
       </a>
+      {/* item login */}
+
+      <h4 className="title__menu">Menu</h4>
       <ul className="list">
         <li className="item active">
           <Link className="item__link" to="/">
@@ -50,28 +28,28 @@ function NavBars() {
         {localStorage.getItem("name") && (
           <>
             <li className="item ">
-              <Link className="item__link" to="/managerstudents">
-                Quản lí sinh viên
+              <Link className="item__link" to="/manager/students">
+                Sinh Viên
               </Link>
             </li>
             <li className="item">
-              <Link className="item__link" to="/managertution">
-                Quản lí học phí
+              <Link className="item__link" to="/manager/tution">
+                Học Phí
               </Link>
             </li>
             <li className="item">
-              <Link className="item__link" to="/managerlearn">
-                Học tập
+              <Link className="item__link" to="/manager/learn">
+                Điểm
               </Link>
             </li>
             <li className="item ">
-              <Link className="item__link" to="/managerstudents">
-                Quản lí giảng viên
+              <Link className="item__link" to="/manager/teacher">
+                Giảng Viên
               </Link>
             </li>
             <li className="item">
-              <Link className="item__link" to="/managerstudents">
-                Các khoa
+              <Link className="item__link" to="/manager/department">
+                Các Khoa
               </Link>
             </li>
             <li className="item">
@@ -82,36 +60,6 @@ function NavBars() {
           </>
         )}
         <span className="g"></span>
-        {user && user.name ? (
-          <>
-            <li className="item">
-              <span onClick={handleEventUserName} className="item__user-name">
-                {user.name}
-                <AiFillCaretDown className="icon" />
-              </span>
-            </li>
-            <Link
-              className="item__link item__logout"
-              to="/"
-              onClick={handleLogOut}
-            >
-              Đăng Xuất
-            </Link>
-          </>
-        ) : (
-          <>
-            <li className="item">
-              <Link className="item__link" to="/account/register">
-                Đăng Ký
-              </Link>
-            </li>
-            <li className="item">
-              <Link className="item__link" to="/account/login">
-                Đăng Nhập
-              </Link>
-            </li>
-          </>
-        )}
       </ul>
     </nav>
   );

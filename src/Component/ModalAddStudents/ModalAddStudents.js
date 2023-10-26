@@ -20,7 +20,12 @@ const ModalAddStudents = (props) => {
   const [nation, setNation] = useState("");
   const [graduationPlace, setGraduationPlace] = useState("");
   const [yearGraduationPlace, setYearGraduationPlace] = useState("");
-
+  //
+  const [pointLT, setPointLT] = useState(" ");
+  const [pointCSDL, setpointCSDL] = useState(" ");
+  const [pointCode, setpointCode] = useState(" ");
+  const [pointQTCSDL, setpointQTCSDL] = useState(" ");
+  const [pointTT, setpointTT] = useState(" ");
   const handleClickAdd = () => {
     postData();
     setName("");
@@ -36,6 +41,11 @@ const ModalAddStudents = (props) => {
     setNation("");
     setYearGraduationPlace("");
     setGraduationPlace("");
+    setPointLT("");
+    setpointCSDL("");
+    setpointCode("");
+    setpointTT("");
+    setpointQTCSDL("");
   };
   async function postData(
     data = {
@@ -53,6 +63,11 @@ const ModalAddStudents = (props) => {
       yearGraduationPlace,
       graduationPlace,
       nation,
+      pointCSDL,
+      pointCode,
+      pointLT,
+      pointQTCSDL,
+      pointTT,
     }
   ) {
     const response = await postStudents(data);

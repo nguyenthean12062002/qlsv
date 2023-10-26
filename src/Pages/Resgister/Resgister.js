@@ -9,9 +9,9 @@ const Register = () => {
 
   return (
     <>
-      <h3 className="my-3">Đăng Ký</h3>
+      <h3 className="my-1">Đăng Ký</h3>
       <div className="d-flex align-items-center justify-content-center ">
-        <form className="w-25 mt-5 bg-light py-5 px-5 ">
+        <form className="w-50 mt-5 bg-light py-5 px-5 ">
           <div className="form-group ">
             <input
               value={userName}

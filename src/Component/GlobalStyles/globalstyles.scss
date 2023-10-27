@@ -93,7 +93,35 @@ body {
     }
   }
 }
+//register
+.register {
+  opacity: 1;
+  cursor: pointer;
+}
+.register.register--disable {
+  opacity: 0.6;
+  cursor: none;
+}
 // btn
 .btn__register {
   margin-left: 24px;
+}
+
+.manager__learn {
+  .list {
+    width: 100%;
+    text-align: start;
+    list-style: none;
+  }
+}
+.tr__small {
+  text-align: start;
+  width: 100%;
+  height: 24px;
+  td {
+    width: 100%;
+    padding: 4px 0px;
+    text-align: start;
+    padding-left: 10px;
+  }
 }

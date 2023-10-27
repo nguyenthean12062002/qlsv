@@ -1,11 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 const Register = () => {
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userAgainPass, setUserAgainPass] = useState("");
+  const [check, setCheck] = useState("");
+  const classRegiter = document.querySelector(".register");
+  useEffect(() => {
+    if (
+      check &&
+      userName !== "" &&
+      userEmail !== "" &&
+      userPass === userAgainPass
+    ) {
+      classRegiter.classList.remove("register--disable");
+    } else {
+      classRegiter.classList.add("register--disable");
+    }
+  }, [userName, userAgainPass, userPass, check]);
 
   return (
     <>
@@ -64,6 +79,9 @@ const Register = () => {
               type="checkbox"
               className="form-check-input"
               id="exampleCheck1"
+              onChange={(e) => {
+                setCheck(e.target.value);
+              }}
             />
             <label
               className="form-check-label ms-3 text-black"
@@ -72,10 +90,10 @@ const Register = () => {
               Đồng ý với điều khoản và dịch vụ
             </label>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className=" btn btn-primary">
             <Link
               to="/accout/register"
-              className="text-white text-decoration-none"
+              className="text-white text-decoration-none register register--disable"
             >
               Đăng Ký
             </Link>

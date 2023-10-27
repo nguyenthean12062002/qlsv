@@ -49,7 +49,7 @@ const Home = () => {
                   {user && user.name ? (
                     <Button variant="primary">
                       <Link
-                        to="/managerstudents"
+                        to="/manager/students"
                         className="text-white text-decoration-none"
                       >
                         Đi đến quản lí sinh viên

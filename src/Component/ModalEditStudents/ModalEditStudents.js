@@ -288,7 +288,7 @@ const ModalEditStudents = (props) => {
             onClick={handleClickUpdateEdit}
             onMouseUp={handleClose}
           >
-            Thêm sinh viên
+            Cập nhật thông tin sinh viên
           </Button>
         </Modal.Footer>
       </Modal>

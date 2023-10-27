@@ -1,6 +1,9 @@
 import "./index.scss";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../Context/UseContext";
+import { useContext, useEffect } from "react";
 function NavBars() {
+  const { user } = useContext(UserContext);
   const loadActive = () => {
     const listItems = document.querySelectorAll(".item");
     listItems.forEach((listItem) => {
@@ -10,7 +13,8 @@ function NavBars() {
       });
     });
   };
-  loadActive();
+  useEffect(loadActive, []);
+
   return (
     <nav className="nav d-flex flex-column">
       <a className="title" to="/">
@@ -25,9 +29,9 @@ function NavBars() {
             Trang Chủ
           </Link>
         </li>
-        {localStorage.getItem("name") && (
+        {localStorage.getItem("name") && user.name && (
           <>
-            <li className="item ">
+            <li className="item">
               <Link className="item__link" to="/manager/students">
                 Sinh Viên
               </Link>
@@ -42,21 +46,20 @@ function NavBars() {
                 Điểm
               </Link>
             </li>
-            <li className="item ">
+            <li className="item">
               <Link className="item__link" to="/manager/teacher">
-                Giảng Viên
+                Môn học
               </Link>
             </li>
-            <li className="item">
-              <Link className="item__link" to="/manager/department">
-                Các Khoa
-              </Link>
-            </li>
-            <li className="item">
-              <Link className="item__link" to="/managerstudents">
-                Phân quyền truy cập
-              </Link>
-            </li>
+            {user.name === "admin" ? (
+              <li className="item">
+                <Link className="item__link" to="/manager/permisson">
+                  Phân quyền truy cập
+                </Link>
+              </li>
+            ) : (
+              <></>
+            )}
           </>
         )}
         <span className="g"></span>

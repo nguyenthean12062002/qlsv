@@ -21,7 +21,6 @@ const Top = () => {
       login(localStorage.getItem("name"));
     }
   }, []);
-
   const { user, login, logout } = useContext(UserContext);
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -53,7 +52,7 @@ const Top = () => {
             </li>
             <li className="login__item">
               <Link className="login__link" to="account/register">
-                Đăngk ký
+                Đăng ký
               </Link>
             </li>
           </>

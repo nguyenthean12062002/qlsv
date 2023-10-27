@@ -1,10 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Redierct,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Header from "./Layout/Header/Header";
 import Home from "./Pages/Home/Home";
@@ -13,6 +8,7 @@ import ManagerStudents from "./Pages/ManagerStudents/ManagerStudents";
 import ManagerTution from "./Pages/ManagerTution/ManagerTution";
 import ManagerLearn from "./Pages/ManagerLearn/ManagerLearn";
 import { ManagerTeacher } from "./Pages/ManagerTeacher/ManagerTeacher";
+import ManagerPermission from "./Pages/ManagerPermission/ManagerPermission";
 import ManagerDepartment from "./Pages/ManagerDepartment/ManagerDepartment";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Resgister/Resgister";
@@ -37,6 +33,11 @@ function App() {
                 <Route path="/account/register" element={<Register />} />
                 <Route path="/manager/teacher" element={<ManagerTeacher />} />
                 <Route
+                  path="/manager/permisson"
+                  element={<ManagerPermission />}
+                />
+
+                <Route
                   path="/manager/department"
                   element={<ManagerDepartment />}
                 />
@@ -44,7 +45,6 @@ function App() {
             </Container>
           </main>
         </div>
-        <Footer />
       </Router>
     </>
   );

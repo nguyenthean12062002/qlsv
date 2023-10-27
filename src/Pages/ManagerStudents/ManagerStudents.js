@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Table from "react-bootstrap/Table";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -9,8 +9,9 @@ import {
 import ModalAddStudents from "../../Component/ModalAddStudents/ModalAddStudents.js";
 import ModalEditStudents from "../../Component/ModalEditStudents/ModalEditStudents";
 import ModalReviewStudents from "../../Component/ModalReviewStdudents/ModalReviewStudents";
-
+import { UserContext } from "../../Context/UseContext";
 const ManagerStudents = () => {
+  const { user } = useContext(UserContext);
   const [listStudents, setListStudents] = useState([]);
   const [isShowModalAddStudents, setShowModalAddStudents] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -132,49 +133,61 @@ const ManagerStudents = () => {
                   <td className="text-capitalize">{item.name}</td>
                   <td>{item.codeStudents}</td>
                   <td className="text-capitalize">{item.department}</td>
-                  <td className="text-capitalize">{item.address}</td>
+                  <td className="text-capitalize">{item.select}</td>
                   <td className="d-flex align-items-center justify-content-center ">
                     <div
                       className="btn-toolbar"
                       role="toolbar"
                       aria-label="Tool options"
                     >
-                      <button
-                        onClick={handleReviewStudents}
-                        data-index={item.id}
-                        className="button px-2 border border-secondary border-radius rounded bg-secondary"
-                      >
-                        Xem
-                      </button>
-
                       <div
                         className="btn-group btn-group-sm me-2"
                         role="group"
                         aria-label="first button"
                       >
                         <button
-                          type="button"
-                          className="btn btn-warning"
+                          onClick={handleReviewStudents}
                           data-index={item.id}
-                          onClick={handleEditStudents}
+                          className="button px-2 border border-secondary border-radius rounded bg-secondary"
                         >
-                          Sửa
+                          Xem
                         </button>
                       </div>
-                      <div
-                        className="btn-group btn-group-sm"
-                        role="group"
-                        aria-label="Second button"
-                      >
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          data-index={item.id}
-                          onClick={handleDeleteStudents}
-                        >
-                          Xóa
-                        </button>
-                      </div>
+                      {user.name === "admin" ? (
+                        <>
+                          {" "}
+                          <div
+                            className="btn-group btn-group-sm me-2"
+                            role="group"
+                            aria-label="first button"
+                          >
+                            <button
+                              type="button"
+                              className="btn btn-warning"
+                              data-index={item.id}
+                              onClick={handleEditStudents}
+                            >
+                              Sửa
+                            </button>
+                          </div>
+                          <div
+                            className="btn-group btn-group-sm"
+                            role="group"
+                            aria-label="Second button"
+                          >
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              data-index={item.id}
+                              onClick={handleDeleteStudents}
+                            >
+                              Xóa
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </td>
                 </tr>

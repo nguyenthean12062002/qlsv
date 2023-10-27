@@ -1,11 +1,13 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Table } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import { FetchAllStudents } from "../../Services/StudentServices";
 
+import { UserContext } from "../../Context/UseContext";
 import { ModalEdit } from "../../Component/Learn/ModalEditStudentLearn/ModalEdit";
 const ManagerLearn = () => {
+  const { user } = useContext(UserContext);
   const [listStudentsLearn, setStudentsLearn] = useState([]);
   const [id, setId] = useState(0);
   const [isShow, setIsShow] = useState(false);
@@ -82,33 +84,37 @@ const ManagerLearn = () => {
                 <td className="text-capitalize">{item.pointTT}</td>
 
                 <td className="d-flex align-items-center justify-content-center ">
-                  <div
-                    className="btn-toolbar"
-                    role="toolbar"
-                    aria-label="Tool options"
-                  >
-                    <button
-                      onClick={handleShow}
-                      data-index={item.id}
-                      className="button px-2 border border-secondary border-radius rounded bg-secondary"
-                    >
-                      Sửa
-                    </button>
-
+                  {user.name === "admin" ? (
                     <div
-                      className="btn-group btn-group-sm"
-                      role="group"
-                      aria-label="Second button"
+                      className="btn-toolbar"
+                      role="toolbar"
+                      aria-label="Tool options"
                     >
                       <button
-                        type="button"
-                        className="btn btn-danger"
+                        onClick={handleShow}
                         data-index={item.id}
+                        className="button px-2 border border-secondary border-radius rounded bg-secondary"
                       >
-                        Thêm
+                        Sửa
                       </button>
+
+                      <div
+                        className="btn-group btn-group-sm"
+                        role="group"
+                        aria-label="Second button"
+                      >
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          data-index={item.id}
+                        >
+                          Thêm
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <>!</>
+                  )}
                 </td>
               </tr>
             );

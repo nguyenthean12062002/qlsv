@@ -35,7 +35,6 @@ const ManagerTution = () => {
 
   return (
     <>
-      <h2 className="my-4">Học phí sinh viên</h2>
       <div className="w-100">
         <div className="w-100 h-10 d-flex my-3 justify-content-between">
           <h3>Thông tin học phí sinh viên</h3>
